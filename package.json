@@ -6,7 +6,7 @@
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "repository": "https://github.com/davidgovea/redux-saga-thunk-actions",
-  "license": "MIT",
+  "license": "WTFPL",
   "keywords": [],
   "scripts": {
     "describe": "npm-scripts-info",
