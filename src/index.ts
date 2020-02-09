@@ -82,7 +82,7 @@ export type AwaitSaga<
 > = OutputType extends undefined
   ? AllowNoRequestParameters<
       ActionCreator,
-      ExtractSuccessPayload<ActionCreator>
+      Promise<ExtractSuccessPayload<ActionCreator>>
     >
   : AllowNoRequestParameters<ActionCreator, OutputType>;
 export const awaitSaga = <
