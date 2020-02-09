@@ -59,7 +59,7 @@
 					<a href="sagathunkactionapi.html">SagaThunkActionApi</a>
 				</li>
 			</ul>
-			<h1>Interface SagaThunkActionApi&lt;In, Out&gt;</h1>
+			<h1>Interface SagaThunkActionApi&lt;RequestPayload, OutputPayload&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -70,10 +70,10 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>In</h4>
+						<h4>RequestPayload</h4>
 					</li>
 					<li>
-						<h4>Out</h4>
+						<h4>OutputPayload</h4>
 					</li>
 				</ul>
 			</section>
@@ -89,50 +89,50 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="sagathunkactionapi.html#request" class="tsd-kind-icon">request</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="sagathunkactionapi.html#success" class="tsd-kind-icon">success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sagathunkactionapi.html#request" class="tsd-kind-icon">request</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="sagathunkactionapi.html#success" class="tsd-kind-icon">success</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="request" class="tsd-anchor"></a>
 					<h3>request</h3>
-					<div class="tsd-signature tsd-kind-icon">request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">In extends string | boolean | object ? (payload: In) &#x3D;&gt; any : () &#x3D;&gt; any</span></div>
+					<div class="tsd-signature tsd-kind-icon">request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RequestPayload</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">RequestPayload</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/davidgovea/redux-saga-thunk-actions/blob/e000d0b/src/index.ts#L50">index.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/davidgovea/redux-saga-thunk-actions/blob/fb1ca84/src/index.ts#L60">index.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="success" class="tsd-anchor"></a>
 					<h3>success</h3>
-					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OutputPayload</span>, meta<span class="tsd-signature-symbol">: </span><a href="sagathunkmeta.html" class="tsd-signature-type">SagaThunkMeta</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/davidgovea/redux-saga-thunk-actions/blob/e000d0b/src/index.ts#L53">index.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/davidgovea/redux-saga-thunk-actions/blob/fb1ca84/src/index.ts#L63">index.ts:63</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Out</span>, meta<span class="tsd-signature-symbol">: </span><a href="sagathunkmeta.html" class="tsd-signature-type">SagaThunkMeta</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OutputPayload</span>, meta<span class="tsd-signature-symbol">: </span><a href="sagathunkmeta.html" class="tsd-signature-type">SagaThunkMeta</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>payload: <span class="tsd-signature-type">Out</span></h5>
+												<h5>payload: <span class="tsd-signature-type">OutputPayload</span></h5>
 											</li>
 											<li>
 												<h5>meta: <a href="sagathunkmeta.html" class="tsd-signature-type">SagaThunkMeta</a></h5>
@@ -159,27 +159,36 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter tsd-is-not-exported">
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
 						<a href="sagathunkactionapi.html" class="tsd-kind-icon">Saga<wbr>Thunk<wbr>Action<wbr>Api</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="sagathunkactionapi.html#request" class="tsd-kind-icon">request</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="sagathunkactionapi.html#success" class="tsd-kind-icon">success</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-is-not-exported">
+					<li class=" tsd-kind-interface">
 						<a href="sagathunkmeta.html" class="tsd-kind-icon">Saga<wbr>Thunk<wbr>Meta</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-not-exported">
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#allownorequestparameters" class="tsd-kind-icon">Allow<wbr>NoRequest<wbr>Parameters</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="../globals.html#awaitsaga" class="tsd-kind-icon">Await<wbr>Saga</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../globals.html#successpayload" class="tsd-kind-icon">Success<wbr>Payload</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#awaitsaganoreturn" class="tsd-kind-icon">Await<wbr>Saga<wbr>NoReturn</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#extractsuccesspayload" class="tsd-kind-icon">Extract<wbr>Success<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#triggersaga" class="tsd-kind-icon">Trigger<wbr>Saga</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="../globals.html#awaitsaga" class="tsd-kind-icon">await<wbr>Saga</a>
