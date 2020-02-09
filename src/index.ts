@@ -69,13 +69,22 @@ type ExtractSuccessPayload<T> = T extends {
   ? SuccessPayload
   : any;
 
-type AwaitSaga<
+type AllowNoRequestParameters<
   ActionCreator extends SagaThunkActionApi,
   OutputType
 > = Parameters<ActionCreator['request']> extends [any]
   ? (arg: Parameters<ActionCreator['request']>[0]) => OutputType
   : () => OutputType;
 
+export type AwaitSaga<
+  ActionCreator extends SagaThunkActionApi,
+  OutputType = undefined
+> = OutputType extends undefined
+  ? AllowNoRequestParameters<
+      ActionCreator,
+      ExtractSuccessPayload<ActionCreator>
+    >
+  : AllowNoRequestParameters<ActionCreator, OutputType>;
 export const awaitSaga = <
   OutputType = undefined,
   ActionCreator extends SagaThunkActionApi = any
@@ -84,15 +93,20 @@ export const awaitSaga = <
 ) =>
   (sagaThunkActionCreator.request as unknown) as AwaitSaga<
     ActionCreator,
-    OutputType extends undefined
-      ? Promise<ExtractSuccessPayload<ActionCreator>>
-      : OutputType
+    OutputType
   >;
 
+export type TriggerSaga<ActionCreator extends SagaThunkActionApi> = AwaitSaga<
+  ActionCreator,
+  void
+>;
 export const triggerSaga = <ActionCreator extends SagaThunkActionApi>(
   sagaThunkActionCreator: ActionCreator
 ) => awaitSaga<void>(sagaThunkActionCreator);
 
+export type AwaitSagaNoReturn<
+  ActionCreator extends SagaThunkActionApi
+> = AwaitSaga<ActionCreator, Promise<void>>;
 export const awaitSagaNoReturn = <ActionCreator extends SagaThunkActionApi>(
   sagaThunkActionCreator: ActionCreator
 ) => awaitSaga<Promise<void>>(sagaThunkActionCreator);
