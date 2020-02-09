@@ -1,6 +1,6 @@
 {
   "name": "redux-saga-thunk-actions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Action helpers for using redux-saga-thunk with TypeScript",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
