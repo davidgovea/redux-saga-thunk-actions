@@ -4,79 +4,95 @@ interface SagaThunkMeta {
   readonly thunk: any;
 }
 
-export const createFailureAction = <T extends string>(type: T) => {
+export const createFailureAction = <ActionType extends string>(
+  type: ActionType
+) => {
   const selector = createStandardAction(type);
-  return <P = Error, M = undefined>() =>
-    selector.map((payload: P, meta: M) => ({
+  return <Payload = Error, Meta = undefined>() =>
+    selector.map((payload: Payload, meta: Meta) => ({
       payload,
       ...(meta ? { meta } : {}),
       error: true
     }));
 };
 
-export const createEventAction = <T1 extends string, T2 extends string>(
-  successType: T1,
-  failureType: T2
+export const createEventAction = <
+  SuccessActionType extends string,
+  FailureActionType extends string
+>(
+  successType: SuccessActionType,
+  failureType: FailureActionType
 ) => {
-  return <P1, P2 = Error>() => ({
-    success: createStandardAction(successType)<P1>(),
-    failure: createFailureAction(failureType)<P2>()
+  return <SuccessPayload, FailurePayload = Error>() => ({
+    success: createStandardAction(successType)<SuccessPayload>(),
+    failure: createFailureAction(failureType)<FailurePayload>()
   });
 };
 
 export const createSagaThunkAction = <
-  T1 extends string,
-  T2 extends string,
-  T3 extends string
+  RequestActionType extends string,
+  SuccessActionType extends string,
+  FailureActionType extends string
 >(
-  requestType: T1,
-  successType: T2,
-  failureType: T3
+  requestType: RequestActionType,
+  successType: SuccessActionType,
+  failureType: FailureActionType
 ) => {
-  return <P1, P2, P3 = Error>() => {
+  return <RequestPayload, SuccessPayload, FailurePayload = Error>() => {
     return {
-      request: createStandardAction(requestType).map((payload: P1) => ({
-        payload,
-        meta: { thunk: true }
-      })),
-      success: createStandardAction(successType)<P2, SagaThunkMeta>(),
-      failure: createFailureAction(failureType)<P3, SagaThunkMeta>()
+      request: createStandardAction(requestType).map(
+        (payload: RequestPayload) => ({
+          payload,
+          meta: { thunk: true }
+        })
+      ),
+      success: createStandardAction(successType)<
+        SuccessPayload,
+        SagaThunkMeta
+      >(),
+      failure: createFailureAction(failureType)<FailurePayload, SagaThunkMeta>()
       // ...(cancelType ? { cancel: createStandardAction(cancelType)<P4>() } : {}),
     };
   };
 };
 
-interface SagaThunkActionApi<In = any, Out = any> {
-  readonly request: In extends object | string | boolean
-    ? (payload: In) => any
+interface SagaThunkActionApi<RequestPayload = any, OutputPayload = any> {
+  readonly request: RequestPayload extends object | string | boolean
+    ? (payload: RequestPayload) => any
     : () => any;
-  success: (payload: Out, meta: SagaThunkMeta) => any;
+  success: (payload: OutputPayload, meta: SagaThunkMeta) => any;
   // failure: (payload: Error, meta: SagaThunkMeta) => any;
 }
-type SuccessPayload<T> = T extends {
-  success: PayloadMetaAC<string, infer P, SagaThunkMeta>;
+type ExtractSuccessPayload<T> = T extends {
+  success: PayloadMetaAC<string, infer SuccessPayload, SagaThunkMeta>;
 }
-  ? P
+  ? SuccessPayload
   : any;
 
-export const awaitSaga = <R = undefined, T extends SagaThunkActionApi = any>(
-  sagaThunkActionCreator: T
+type AwaitSaga<
+  ActionCreator extends SagaThunkActionApi,
+  OutputType
+> = Parameters<ActionCreator['request']> extends [any]
+  ? (arg: Parameters<ActionCreator['request']>[0]) => OutputType
+  : () => OutputType;
+
+export const awaitSaga = <
+  OutputType = undefined,
+  ActionCreator extends SagaThunkActionApi = any
+>(
+  sagaThunkActionCreator: ActionCreator
 ) =>
   (sagaThunkActionCreator.request as unknown) as AwaitSaga<
-    T,
-    R extends undefined ? Promise<SuccessPayload<T>> : R
+    ActionCreator,
+    OutputType extends undefined
+      ? Promise<ExtractSuccessPayload<ActionCreator>>
+      : OutputType
   >;
 
-type AwaitSaga<T extends SagaThunkActionApi, R> = Parameters<
-  T['request']
-> extends [any]
-  ? (arg: Parameters<T['request']>[0]) => R
-  : () => R;
-
-export const triggerSaga = <T extends SagaThunkActionApi>(
-  sagaThunkActionCreator: T
+export const triggerSaga = <ActionCreator extends SagaThunkActionApi>(
+  sagaThunkActionCreator: ActionCreator
 ) => awaitSaga<void>(sagaThunkActionCreator);
 
-export const awaitSagaNoReturn = <T extends SagaThunkActionApi>(
-  sagaThunkActionCreator: T
+export const awaitSagaNoReturn = <ActionCreator extends SagaThunkActionApi>(
+  sagaThunkActionCreator: ActionCreator
 ) => awaitSaga<Promise<void>>(sagaThunkActionCreator);
